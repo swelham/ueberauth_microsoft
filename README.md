@@ -70,10 +70,6 @@ Depending on the configured url you can initial the request through:
 
     /auth/microsoft
 
-Or with options:
-
-    /auth/microsoft?scope=users:read
-
 By default the scopes used are
 * openid
 * email
