@@ -5,6 +5,8 @@ defmodule UeberauthMicrosoft.Mixfile do
     [app: :ueberauth_microsoft,
      version: "0.1.0",
      elixir: "~> 1.4",
+     description: description(),
+     package: package(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -30,7 +32,19 @@ defmodule UeberauthMicrosoft.Mixfile do
   defp deps do
     [
       {:oauth2, "0.6.0"},
-      {:ueberauth, "~> 0.4"}
+      {:ueberauth, "~> 0.4"},
+      {:ex_doc, ">= 0.14.0", only: :dev}
     ]
+  end
+
+  defp description do
+    "Microsoft Strategy for Überauth"
+  end
+
+  defp package do
+    [name: :ueberauth_microsoft,
+     maintainers: ["swelham"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/swelham/ueberauth_microsoft"}]
   end
 end
