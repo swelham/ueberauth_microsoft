@@ -1,18 +1,5 @@
 defmodule UeberauthMicrosoft do
-  @moduledoc """
-  Documentation for UeberauthMicrosoft.
-  """
+  @moduledoc false
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> UeberauthMicrosoft.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def default_http_opts, do: [hackney: [ssl_options: [versions: [:'tlsv1.2']]]]
 end
