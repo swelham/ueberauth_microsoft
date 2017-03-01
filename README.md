@@ -29,7 +29,7 @@
       providers: [
         slack: {Ueberauth.Strategy.Microsoft, []}
       ]
-    ``1
+    ```
 
 1.  Update your provider configuration:
 
