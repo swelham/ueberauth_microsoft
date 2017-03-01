@@ -27,7 +27,7 @@
     ```elixir
     config :ueberauth, Ueberauth,
       providers: [
-        slack: {Ueberauth.Strategy.Microsoft, []}
+        microsoft: {Ueberauth.Strategy.Microsoft, []}
       ]
     ```
 
