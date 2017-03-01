@@ -10,9 +10,15 @@ defmodule Ueberauth.Strategy.Microsoft do
   Handles initial request for Microsoft authentication.
   """
   def handle_request!(conn) do
+    default_scopes = option(conn, :default_scope)
+    extra_scopes = option(conn, :extra_scopes)
+    
+    scopes = "#{extra_scopes} #{default_scopes}"
+
     authorize_url =
       conn.params
-      |> put_param(conn, "scope", :default_scope)
+      #|> put_param(conn, "scope", :default_scope)
+      |> Map.put(:scope, scopes)
       |> Map.put(:redirect_uri, callback_url(conn))
       |> OAuth.authorize_url!
 
@@ -109,14 +115,5 @@ defmodule Ueberauth.Strategy.Microsoft do
     conn
       |> options
       |> Keyword.get(key, default)
-  end
-  defp option(nil, conn, key), do: option(conn, key)
-  defp option(value, _conn, _key), do: value
-  
-  defp put_param(params, conn, name, config_key) do
-    case params[name] do
-      nil -> Map.put(params, name, option(params[name], conn, config_key))
-      param -> param
-    end
   end
 end
