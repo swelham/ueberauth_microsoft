@@ -55,11 +55,11 @@ defmodule Ueberauth.Strategy.Microsoft do
   end
 
   def uid(conn) do
-    id_field = option(conn, :uid_field)
+    user = conn
+      |> option(:uid_field)
+      |> to_string
 
-    conn    
-      |> info
-      |> Map.get(id_field)
+    conn.private.ms_user[user]
   end
 
   def credentials(conn) do
