@@ -23,16 +23,17 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
 
   def authorize_url!(params \\ [], opts \\ []) do
     opts
-      |> client()
+      |> client
       |> Client.authorize_url!(params)
   end
 
   def get_token!(params \\ [], opts \\ []) do
     opts
-      |> client()
-      |> put_param(:client_secret, client().client_secret)
-      |> Client.get_token!(params, [], opts ++ UeberauthMicrosoft.default_http_opts)
+      |> client
+      |> Client.get_token!(params)
   end
+
+  # oauth2 Strategy Callbacks
 
   def authorize_url(client, params) do
     AuthCode.authorize_url(client, params)
@@ -40,6 +41,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
 
   def get_token(client, params, headers) do
     client
+      |> put_param(:client_secret, client.client_secret)
       |> put_header("Accept", "application/json")
       |> AuthCode.get_token(params, headers)
   end
