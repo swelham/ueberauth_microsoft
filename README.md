@@ -4,13 +4,13 @@
 
 ## Installation
 
-1. Setup your application at the new [Microsoft app regisitration portal](https://apps.dev.microsoft.com).
+1. Setup your application at the new [Microsoft app registration portal](https://apps.dev.microsoft.com).
 
 1. Add `:ueberauth_microsoft` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:ueberauth_microsoft, "~> 0.1"}]
+      [{:ueberauth_microsoft, "~> 0.3"}]
     end
     ```
 
