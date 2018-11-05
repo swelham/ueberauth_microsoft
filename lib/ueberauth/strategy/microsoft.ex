@@ -103,8 +103,8 @@ defmodule Ueberauth.Strategy.Microsoft do
     case OAuth2.Client.get(client, path) do
       {:ok, %Response{status_code: 401}} ->
         set_errors!(conn, [error("token", "unauthorized")])
-      {:ok, %Response{status_code: 200, body: response}} ->
-          put_private(conn, :ms_user, response)
+      {:ok, %Response{status_code: status, body: response}} when status in 200..299 ->
+        put_private(conn, :ms_user, response)
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
