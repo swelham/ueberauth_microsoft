@@ -21,3 +21,6 @@ erl_crash.dump
 
 #vscode files
 .vscode
+
+# ignore elixir language server files
+/.elixir_ls

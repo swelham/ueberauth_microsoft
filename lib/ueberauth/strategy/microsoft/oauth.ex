@@ -9,28 +9,28 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     site: "https://graph.microsoft.com",
     authorize_url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
     token_url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-    request_opts: [ssl_options: [versions: [:'tlsv1.2']]]
+    request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
   ]
 
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, Ueberauth.Strategy.Microsoft.OAuth)
 
     @defaults
-      |> Keyword.merge(config)
-      |> Keyword.merge(opts)
-      |> Client.new
+    |> Keyword.merge(config)
+    |> Keyword.merge(opts)
+    |> Client.new()
   end
 
   def authorize_url!(params \\ [], opts \\ []) do
     opts
-      |> client
-      |> Client.authorize_url!(params)
+    |> client
+    |> Client.authorize_url!(params)
   end
 
   def get_token!(params \\ [], opts \\ []) do
     opts
-      |> client
-      |> Client.get_token!(params)
+    |> client
+    |> Client.get_token!(params)
   end
 
   # oauth2 Strategy Callbacks
@@ -41,8 +41,8 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
 
   def get_token(client, params, headers) do
     client
-      |> put_param(:client_secret, client.client_secret)
-      |> put_header("Accept", "application/json")
-      |> AuthCode.get_token(params, headers)
+    |> put_param(:client_secret, client.client_secret)
+    |> put_header("Accept", "application/json")
+    |> AuthCode.get_token(params, headers)
   end
 end

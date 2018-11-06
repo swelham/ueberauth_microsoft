@@ -1,6 +1,7 @@
 defmodule Ueberauth.Strategy.Microsoft do
-  use Ueberauth.Strategy, default_scope: "https://graph.microsoft.com/user.read openid email offline_access",
-                          uid_field: :id
+  use Ueberauth.Strategy,
+    default_scope: "https://graph.microsoft.com/user.read openid email offline_access",
+    uid_field: :id
 
   alias OAuth2.{Response, Error}
   alias Ueberauth.Auth.{Info, Credentials, Extra}
@@ -17,10 +18,9 @@ defmodule Ueberauth.Strategy.Microsoft do
 
     authorize_url =
       conn.params
-      #|> put_param(conn, "scope", :default_scope)
       |> Map.put(:scope, scopes)
       |> Map.put(:redirect_uri, callback_url(conn))
-      |> OAuth.authorize_url!
+      |> OAuth.authorize_url!()
 
     redirect!(conn, authorize_url)
   end
@@ -38,6 +38,7 @@ defmodule Ueberauth.Strategy.Microsoft do
         err = token.other_params["error"]
         desc = token.other_params["error_description"]
         set_errors!(conn, [error(err, desc)])
+
       _token ->
         fetch_user(conn, client)
     end
@@ -51,12 +52,13 @@ defmodule Ueberauth.Strategy.Microsoft do
   @doc false
   def handle_cleanup!(conn) do
     conn
-      |> put_private(:ms_token, nil)
-      |> put_private(:ms_user, nil)
+    |> put_private(:ms_token, nil)
+    |> put_private(:ms_user, nil)
   end
 
   def uid(conn) do
-    user = conn
+    user =
+      conn
       |> option(:uid_field)
       |> to_string
 
@@ -103,8 +105,10 @@ defmodule Ueberauth.Strategy.Microsoft do
     case OAuth2.Client.get(client, path) do
       {:ok, %Response{status_code: 401}} ->
         set_errors!(conn, [error("token", "unauthorized")])
+
       {:ok, %Response{status_code: status, body: response}} when status in 200..299 ->
         put_private(conn, :ms_user, response)
+
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
@@ -114,7 +118,7 @@ defmodule Ueberauth.Strategy.Microsoft do
     default = Keyword.get(default_options(), key)
 
     conn
-      |> options
-      |> Keyword.get(key, default)
+    |> options
+    |> Keyword.get(key, default)
   end
 end
