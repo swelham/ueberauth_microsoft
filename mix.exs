@@ -3,7 +3,7 @@ defmodule UeberauthMicrosoft.Mixfile do
 
   def project do
     [app: :ueberauth_microsoft,
-     version: "0.3.0",
+     version: "0.4.0",
      elixir: "~> 1.4",
      description: description(),
      package: package(),
