@@ -33,7 +33,7 @@ defmodule UeberauthMicrosoft.Mixfile do
     [
       {:oauth2, "~> 0.8"},
       {:ueberauth, "~> 0.4"},
-      {:ex_doc, ">= 0.14.0", only: :dev}
+      {:ex_doc, ">= 0.19.0", only: :dev}
     ]
   end
 
