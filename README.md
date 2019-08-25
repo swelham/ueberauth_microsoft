@@ -10,11 +10,11 @@
 
     ```elixir
     def deps do
-      [{:ueberauth_microsoft, "~> 0.4"}]
+      [{:ueberauth_microsoft, "~> 0.5"}]
     end
     ```
 
-1. Add the strategy to your applications:
+2. Add the strategy to your applications:
 
     ```elixir
     def application do
@@ -22,7 +22,7 @@
     end
     ```
 
-1. Add Microsoft to your Überauth configuration:
+3. Add Microsoft to your Überauth configuration:
 
     ```elixir
     config :ueberauth, Ueberauth,
@@ -31,7 +31,7 @@
       ]
     ```
 
-1.  Update your provider configuration:
+4.  Update your provider configuration:
 
     ```elixir
     config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
@@ -39,7 +39,7 @@
       client_secret: System.get_env("MICROSOFT_CLIENT_SECRET")
     ```
 
-1.  Include the Überauth plug in your controller:
+5.  Include the Überauth plug in your controller:
 
     ```elixir
     defmodule MyApp.AuthController do
@@ -49,7 +49,7 @@
     end
     ```
 
-1.  Create the request and callback routes if you haven't already:
+6.  Create the request and callback routes if you haven't already:
 
     ```elixir
     scope "/auth", MyApp do
@@ -60,7 +60,7 @@
     end
     ```
 
-1. Your controller needs to implement callbacks to deal with `Ueberauth.Auth` and `Ueberauth.Failure` responses.
+7. Your controller needs to implement callbacks to deal with `Ueberauth.Auth` and `Ueberauth.Failure` responses.
 
 For an example implementation see the [Überauth Example](https://github.com/ueberauth/ueberauth_example) application.
 
