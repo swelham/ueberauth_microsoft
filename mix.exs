@@ -2,14 +2,16 @@ defmodule UeberauthMicrosoft.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ueberauth_microsoft,
-     version: "0.4.0",
-     elixir: "~> 1.4",
-     description: description(),
-     package: package(),
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :ueberauth_microsoft,
+      version: "0.4.0",
+      elixir: "~> 1.4",
+      description: description(),
+      package: package(),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -31,7 +33,7 @@ defmodule UeberauthMicrosoft.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:oauth2, "~> 0.8"},
+      {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.4"},
       {:ex_doc, ">= 0.19.0", only: :dev}
     ]
@@ -42,9 +44,11 @@ defmodule UeberauthMicrosoft.Mixfile do
   end
 
   defp package do
-    [name: :ueberauth_microsoft,
-     maintainers: ["swelham"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/swelham/ueberauth_microsoft"}]
+    [
+      name: :ueberauth_microsoft,
+      maintainers: ["swelham"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/swelham/ueberauth_microsoft"}
+    ]
   end
 end
