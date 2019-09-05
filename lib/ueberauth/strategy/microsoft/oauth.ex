@@ -1,6 +1,7 @@
 defmodule Ueberauth.Strategy.Microsoft.OAuth do
   use OAuth2.Strategy
 
+  alias Ueberauth
   alias OAuth2.Client
   alias OAuth2.Strategy.AuthCode
 
@@ -14,11 +15,13 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
 
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, Ueberauth.Strategy.Microsoft.OAuth)
+    json_library = Ueberauth.json_library()
 
     @defaults
     |> Keyword.merge(config)
     |> Keyword.merge(opts)
     |> Client.new()
+    |> OAuth2.Client.put_serializer("application/json", json_library)
   end
 
   def authorize_url!(params \\ [], opts \\ []) do
