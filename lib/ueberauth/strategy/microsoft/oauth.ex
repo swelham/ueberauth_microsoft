@@ -5,19 +5,12 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   alias OAuth2.Client
   alias OAuth2.Strategy.AuthCode
 
-  @defaults [
-    strategy: __MODULE__,
-    site: "https://graph.microsoft.com",
-    authorize_url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    token_url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-    request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
-  ]
-
   def client(opts \\ []) do
-    config = Application.get_env(:ueberauth, Ueberauth.Strategy.Microsoft.OAuth)
+    config = Application.get_env(:ueberauth, __MODULE__)
     json_library = Ueberauth.json_library()
 
-    @defaults
+    config
+    |> defaults()
     |> Keyword.merge(config)
     |> Keyword.merge(opts)
     |> Client.new()
@@ -47,5 +40,17 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> put_param(:client_secret, client.client_secret)
     |> put_header("Accept", "application/json")
     |> AuthCode.get_token(params, headers)
+  end
+
+  defp defaults(config) do
+    tenant_id = config[:tenant_id] || "common"
+
+    [
+      strategy: __MODULE__,
+      site: "https://graph.microsoft.com",
+      authorize_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/authorize",
+      token_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/token",
+      request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
+    ]
   end
 end
