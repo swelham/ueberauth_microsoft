@@ -64,6 +64,17 @@
 
 For an example implementation see the [Überauth Example](https://github.com/ueberauth/ueberauth_example) application.
 
+## Single Tenancy
+
+If you are going to use your app only internally you may need to configure it for a single tenant.
+To do so you only need to add `tenant_id` to your provider configuration like:
+  ```
+  config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
+    tenant_id: System.get_env("MICROSOFT_TENANT_ID"),
+    client_id: System.get_env("MICROSOFT_CLIENT_ID"),
+    client_secret: System.get_env("MICROSOFT_CLIENT_SECRET")
+  ```
+
 ## Calling
 
 Depending on the configured url you can initial the request through:
