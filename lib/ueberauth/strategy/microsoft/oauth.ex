@@ -18,21 +18,6 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> OAuth2.Client.put_serializer("application/json", json_library)
   end
 
-  def refresh_client(opts \\ []) do
-    config = Application.get_env(:ueberauth, __MODULE__)
-    json_library = Ueberauth.json_library()
-    defaults = defaults(config)
-
-    config
-    |> defaults()
-    |> Keyword.merge(config)
-    |> Keyword.put(:token_url, Keyword.get(defaults, :refresh_token_url))
-    |> Keyword.put(:token_method, :post)
-    |> Keyword.merge(opts)
-    |> Client.new()
-    |> OAuth2.Client.put_serializer("application/json", json_library)
-  end
-
   def authorize_url!(params \\ [], opts \\ []) do
     opts
     |> client
