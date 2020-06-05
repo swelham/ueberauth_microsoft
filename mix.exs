@@ -33,9 +33,9 @@ defmodule UeberauthMicrosoft.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:oauth2, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
-      {:ex_doc, ">= 0.19.0", only: :dev}
+      {:ex_doc, ">= 0.22.0", only: :dev}
     ]
   end
 
