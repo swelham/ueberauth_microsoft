@@ -17,6 +17,21 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> OAuth2.Client.put_serializer("application/json", json_library)
   end
 
+  def refresh_client(opts \\ []) do
+    config = Application.get_env(:ueberauth, __MODULE__)
+    json_library = Ueberauth.json_library()
+    defaults = defaults(config)
+
+    config
+    |> defaults()
+    |> Keyword.merge(config)
+    |> Keyword.put(:token_url, Keyword.get(defaults, :refresh_token_url))
+    |> Keyword.put(:token_method, :post)
+    |> Keyword.merge(opts)
+    |> Client.new()
+    |> OAuth2.Client.put_serializer("application/json", json_library)
+  end
+
   def authorize_url!(params \\ [], opts \\ []) do
     opts
     |> client
@@ -42,6 +57,11 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> AuthCode.get_token(params, headers)
   end
 
+  def refresh_token(client, params, headers) do
+    client
+    |> Client.refresh_token(params, headers)
+  end
+
   defp defaults(config) do
     tenant_id = config[:tenant_id] || "common"
 
@@ -50,6 +70,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
       site: "https://graph.microsoft.com",
       authorize_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/authorize",
       token_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/token",
+      refresh_token_url: "https://graph.microsoft.com/v1/token",
       request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
     ]
   end
