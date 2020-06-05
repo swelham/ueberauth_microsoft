@@ -98,6 +98,16 @@ config :ueberauth, Ueberauth,
   ]
 ```
 
+## Refreshing Tokens
+
+Depending on your requirements, it may be necessary to get a new access code after expiry.
+To do so, you need to persist the `refresh_token` and use it later to get a new access code like:
+  ```elixir
+  refresh_token = Token.get_refresh_token()
+
+  Ueberauth.Strategy.Microsoft.OAuth.refresh_token!(refresh_token: refresh_token)
+  ```
+ 
 ## License
 
 Please see [LICENSE](https://github.com/ueberauth/ueberauth_microsoft/blob/master/LICENSE) for licensing details.
