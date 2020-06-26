@@ -30,17 +30,26 @@ defmodule Ueberauth.Strategy.Microsoft do
   """
   def handle_callback!(%Plug.Conn{params: %{"code" => code}} = conn) do
     opts = [redirect_uri: callback_url(conn)]
-    client = OAuth.get_token!([code: code], opts)
-    token = client.token
+    client = OAuth.client(opts)
 
-    case token.access_token do
-      nil ->
-        err = token.other_params["error"]
-        desc = token.other_params["error_description"]
+    case OAuth.get_token(client, [code: code], opts) do
+      {:ok, client} ->
+        token = client.token
+
+        case token.access_token do
+          nil ->
+            err = token.other_params["error"]
+            desc = token.other_params["error_description"]
+            set_errors!(conn, [error(err, desc)])
+
+          _token ->
+            fetch_user(conn, client)
+        end
+
+      {:error, error} ->
+        err = error.body["error"]
+        desc = error.body["error_description"]
         set_errors!(conn, [error(err, desc)])
-
-      _token ->
-        fetch_user(conn, client)
     end
   end
 
@@ -103,7 +112,7 @@ defmodule Ueberauth.Strategy.Microsoft do
     path = "https://graph.microsoft.com/v1.0/me/"
 
     case OAuth2.Client.get(client, path) do
-      {:ok, %Response{status_code: 401}} ->
+      {:ok, %Response{status_code: status}} when status in 400..499 ->
         set_errors!(conn, [error("token", "unauthorized")])
 
       {:ok, %Response{status_code: status, body: response}} when status in 200..299 ->
