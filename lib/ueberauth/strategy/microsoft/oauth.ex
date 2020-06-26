@@ -27,7 +27,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   def get_token!(params \\ [], opts \\ []) do
     opts
     |> client
-    |> Client.get_token!(params)
+    |> Client.get_token(params)
   end
 
   def refresh_token!(params \\ [], opts \\ []) do
