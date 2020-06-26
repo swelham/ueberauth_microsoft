@@ -30,9 +30,8 @@ defmodule Ueberauth.Strategy.Microsoft do
   """
   def handle_callback!(%Plug.Conn{params: %{"code" => code}} = conn) do
     opts = [redirect_uri: callback_url(conn)]
-    client = OAuth.get_token!([code: code], opts)
-
-    case client do
+    
+    case OAuth.get_token!([code: code], opts) do
       {:ok, client} ->
         token = client.token
 

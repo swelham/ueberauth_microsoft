@@ -33,7 +33,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   def refresh_token!(params \\ [], opts \\ []) do
     opts ++ [token: %OAuth2.AccessToken{refresh_token: params[:refresh_token]}]
     |> client
-    |> Client.refresh_token!(params)
+    |> Client.refresh_token(params)
   end
 
   # oauth2 Strategy Callbacks
