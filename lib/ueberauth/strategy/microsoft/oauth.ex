@@ -4,6 +4,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   alias Ueberauth
   alias OAuth2.Client
   alias OAuth2.Strategy.AuthCode
+  alias OAuth2.Strategy.Refresh
 
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, __MODULE__)
@@ -26,7 +27,13 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   def get_token!(params \\ [], opts \\ []) do
     opts
     |> client
-    |> Client.get_token!(params)
+    |> Client.get_token(params)
+  end
+
+  def refresh_token!(params \\ [], opts \\ []) do
+    opts ++ [token: %OAuth2.AccessToken{refresh_token: params[:refresh_token]}]
+    |> client
+    |> Client.refresh_token(params)
   end
 
   # oauth2 Strategy Callbacks
@@ -42,14 +49,21 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> AuthCode.get_token(params, headers)
   end
 
+  def refresh_token(client, params, headers) do
+    client
+    |> put_param(:client_id, client.client_id)
+    |> put_param(:client_secret, client.client_secret)
+    |> Refresh.get_token(params, headers)
+  end
+
   defp defaults(config) do
     tenant_id = config[:tenant_id] || "common"
 
     [
       strategy: __MODULE__,
-      site: "https://graph.microsoft.com",
+      site: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0",
       authorize_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/authorize",
-      token_url: "https://login.microsoftonline.com/#{tenant_id}/oauth2/v2.0/token",
+      token_url: "/token",
       request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
     ]
   end

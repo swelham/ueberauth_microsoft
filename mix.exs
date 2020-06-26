@@ -4,8 +4,8 @@ defmodule UeberauthMicrosoft.Mixfile do
   def project do
     [
       app: :ueberauth_microsoft,
-      version: "0.7.0",
-      elixir: "~> 1.4",
+      version: "0.8.0",
+      elixir: "~> 1.10",
       description: description(),
       package: package(),
       build_embedded: Mix.env() == :prod,
@@ -33,9 +33,9 @@ defmodule UeberauthMicrosoft.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:oauth2, "~> 1.0 or ~> 2.0"},
+      {:oauth2, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
-      {:ex_doc, ">= 0.19.0", only: :dev}
+      {:ex_doc, ">= 0.22.0", only: :dev}
     ]
   end
 
