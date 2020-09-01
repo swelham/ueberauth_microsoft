@@ -20,7 +20,7 @@ defmodule Ueberauth.Strategy.Microsoft do
       conn.params
       |> Map.put(:scope, scopes)
       |> Map.put(:redirect_uri, callback_url(conn))
-      |> OAuth.authorize_url!()
+      |> OAuth.authorize_url!(options(conn))
 
     redirect!(conn, authorize_url)
   end
@@ -29,7 +29,7 @@ defmodule Ueberauth.Strategy.Microsoft do
   Handles the callback from Microsoft.
   """
   def handle_callback!(%Plug.Conn{params: %{"code" => code}} = conn) do
-    opts = [redirect_uri: callback_url(conn)]
+    opts = conn |> options() |> Keyword.put(:redirect_uri, callback_url(conn))
     client = OAuth.get_token!([code: code], opts)
     token = client.token
 
