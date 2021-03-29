@@ -109,6 +109,9 @@ defmodule Ueberauth.Strategy.Microsoft do
       {:ok, %Response{status_code: status, body: response}} when status in 200..299 ->
         put_private(conn, :ms_user, response)
 
+      {:error, %Response{body: %{"error" => %{"code" => code, "message" => reason}}}} ->
+        set_errors!(conn, [error(code, reason)])
+
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
