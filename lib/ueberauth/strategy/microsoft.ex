@@ -42,6 +42,9 @@ defmodule Ueberauth.Strategy.Microsoft do
       _token ->
         fetch_user(conn, client)
     end
+  rescue
+    err in [Error] ->
+      set_errors!(conn, [error("OAuth2", err.reason)])
   end
 
   @doc false
