@@ -2,7 +2,7 @@
 
 [![Module Version](https://img.shields.io/hexpm/v/ueberauth_microsoft.svg)](https://hex.pm/packages/ueberauth_microsoft)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ueberauth_microsoft/)
-[![License](https://img.shields.io/hexpm/l/ueberauth_microsoft.svg)](https://github.com/swelham/ueberauth_microsoft/blob/master/LICENSE)
+[![License](https://img.shields.io/hexpm/l/ueberauth_microsoft.svg)](https://github.com/swelham/ueberauth_microsoft/blob/master/LICENSE.md)
 [![Last Updated](https://img.shields.io/github/last-commit/swelham/ueberauth_microsoft.svg)](https://github.com/swelham/ueberauth_microsoft/commits/master)
 
 > Microsoft OAuth2 strategy for Überauth.
@@ -116,7 +116,9 @@ config :ueberauth, Ueberauth,
   ]
 ```
 
-## License
+## Copyright and License
 
-Please see [LICENSE](https://github.com/ueberauth/ueberauth_microsoft/blob/master/LICENSE) for licensing details.
+Copyright (c) 2017 Stuart Welham
 
+Released under the MIT License, which can be found in the repository in
+[LICENSE](./LICENSE.md).
