@@ -1,5 +1,10 @@
 # Überauth Microsoft
 
+[![Module Version](https://img.shields.io/hexpm/v/ueberauth_microsoft.svg)](https://hex.pm/packages/ueberauth_microsoft)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ueberauth_microsoft/)
+[![License](https://img.shields.io/hexpm/l/ueberauth_microsoft.svg)](https://github.com/swelham/ueberauth_microsoft/blob/master/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/swelham/ueberauth_microsoft.svg)](https://github.com/swelham/ueberauth_microsoft/commits/master)
+
 > Microsoft OAuth2 strategy for Überauth.
 
 ## Installation
