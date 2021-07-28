@@ -11,18 +11,15 @@ defmodule Ueberauth.Strategy.Microsoft do
   Handles initial request for Microsoft authentication.
   """
   def handle_request!(conn) do
-    default_scopes = option(conn, :default_scope)
-    extra_scopes = option(conn, :extra_scopes)
+    scopes = conn.params["scope"] || option(conn, :default_scope)
 
-    scopes = "#{extra_scopes} #{default_scopes}"
+    params =
+      [scope: scopes]
+      |> with_optional(:extra_scopes, conn)
+      |> with_state_param(conn)
 
-    authorize_url =
-      conn.params
-      |> Map.put(:scope, scopes)
-      |> Map.put(:redirect_uri, callback_url(conn))
-      |> OAuth.authorize_url!(options(conn))
-
-    redirect!(conn, authorize_url)
+    opts = oauth_client_options_from_conn(conn)
+    redirect!(conn, Ueberauth.Strategy.Microsoft.OAuth.authorize_url!(params, opts))
   end
 
   @doc """
@@ -117,6 +114,21 @@ defmodule Ueberauth.Strategy.Microsoft do
 
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
+    end
+  end
+
+  defp with_optional(opts, key, conn) do
+    if option(conn, key), do: Keyword.put(opts, key, option(conn, key)), else: opts
+  end
+
+  defp oauth_client_options_from_conn(conn) do
+    base_options = [redirect_uri: callback_url(conn)]
+    request_options = conn.private[:ueberauth_request_options].options
+
+    case {request_options[:client_id], request_options[:client_secret]} do
+      {nil, _} -> base_options
+      {_, nil} -> base_options
+      {id, secret} -> [client_id: id, client_secret: secret] ++ base_options
     end
   end
 

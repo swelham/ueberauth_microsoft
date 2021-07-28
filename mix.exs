@@ -4,7 +4,7 @@ defmodule UeberauthMicrosoft.Mixfile do
   def project do
     [
       app: :ueberauth_microsoft,
-      version: "0.12.0",
+      version: "0.13.0",
       elixir: "~> 1.4",
       description: description(),
       package: package(),
@@ -34,7 +34,7 @@ defmodule UeberauthMicrosoft.Mixfile do
   defp deps do
     [
       {:oauth2, "~> 1.0 or ~> 2.0"},
-      {:ueberauth, "~> 0.6"},
+      {:ueberauth, "~> 0.7"},
       {:ex_doc, ">= 0.19.0", only: :dev}
     ]
   end
