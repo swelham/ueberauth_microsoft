@@ -9,25 +9,30 @@
 
 ## Installation
 
-1. Setup your application at the new [Microsoft app registration portal](https://apps.dev.microsoft.com).
+1.  Setup your application at the new [Microsoft app registration
+    portal](https://apps.dev.microsoft.com).
 
-1. Add `:ueberauth_microsoft` to your list of dependencies in `mix.exs`:
+2.  Add `:ueberauth_microsoft` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:ueberauth_microsoft, "~> 0.13"}]
+      [
+        {:ueberauth_microsoft, "~> 0.10"}
+      ]
     end
     ```
 
-2. Add the strategy to your applications:
+3.  Add the strategy to your applications:
 
     ```elixir
     def application do
-      [applications: [:ueberauth_microsoft]]
+      [
+        applications: [:ueberauth_microsoft]
+      ]
     end
     ```
 
-3. Add Microsoft to your Überauth configuration:
+4.  Add Microsoft to your Überauth configuration:
 
     ```elixir
     config :ueberauth, Ueberauth,
@@ -36,7 +41,7 @@
       ]
     ```
 
-4.  Update your provider configuration:
+5.  Update your provider configuration:
 
     ```elixir
     config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
@@ -44,7 +49,7 @@
       client_secret: System.get_env("MICROSOFT_CLIENT_SECRET")
     ```
 
-5.  Include the Überauth plug in your controller:
+6.  Include the Überauth plug in your controller:
 
     ```elixir
     defmodule MyApp.AuthController do
@@ -54,7 +59,7 @@
     end
     ```
 
-6.  Create the request and callback routes if you haven't already:
+7.  Create the request and callback routes if you haven't already:
 
     ```elixir
     scope "/auth", MyApp do
@@ -65,7 +70,8 @@
     end
     ```
 
-7. Your controller needs to implement callbacks to deal with `Ueberauth.Auth` and `Ueberauth.Failure` responses.
+8. Your controller needs to implement callbacks to deal with `Ueberauth.Auth`
+   and `Ueberauth.Failure` responses.
 
 For an example implementation see the [Überauth Example](https://github.com/ueberauth/ueberauth_example) application.
 
@@ -73,12 +79,13 @@ For an example implementation see the [Überauth Example](https://github.com/ueb
 
 If you are going to use your app only internally you may need to configure it for a single tenant.
 To do so you only need to add `tenant_id` to your provider configuration like:
-  ```
-  config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
-    tenant_id: System.get_env("MICROSOFT_TENANT_ID"),
-    client_id: System.get_env("MICROSOFT_CLIENT_ID"),
-    client_secret: System.get_env("MICROSOFT_CLIENT_SECRET")
-  ```
+
+```elixir
+config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
+  tenant_id: System.get_env("MICROSOFT_TENANT_ID"),
+  client_id: System.get_env("MICROSOFT_CLIENT_ID"),
+  client_secret: System.get_env("MICROSOFT_CLIENT_SECRET")
+```
 
 ## Calling
 
@@ -86,23 +93,30 @@ Depending on the configured url you can initial the request through:
 
     /auth/microsoft
 
-By default the scopes used are
+By default the scopes used are:
+
 * openid
 * email
 * offline_access
 * https://graph.microsoft.com/user.read
 
-*Note: at least one service scope is required in order for a token to be returned by the Microsoft endpoint*
+*Note: at least one service scope is required in order for a token to be
+returned by the Microsoft endpoint*
 
-You can configure additional scopes to be used by passing the `extra_scopes` option into the provider
+You can configure additional scopes to be used by passing the `extra_scopes`
+option into the provider:
 
 ```elixir
 config :ueberauth, Ueberauth,
   providers: [
-    microsoft: {Ueberauth.Strategy.Microsoft, [extra_scopes: "https://graph.microsoft.com/calendars.read"]}
+    microsoft: {
+      Ueberauth.Strategy.Microsoft,
+      [extra_scopes: "https://graph.microsoft.com/calendars.read"]
+    }
   ]
 ```
 
 ## License
 
 Please see [LICENSE](https://github.com/ueberauth/ueberauth_microsoft/blob/master/LICENSE) for licensing details.
+
