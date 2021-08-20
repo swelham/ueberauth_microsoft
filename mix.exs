@@ -1,54 +1,58 @@
 defmodule UeberauthMicrosoft.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/swelham/ueberauth_microsoft"
+  @version "0.13.0"
+
   def project do
     [
       app: :ueberauth_microsoft,
-      version: "0.13.0",
+      version: @version,
       elixir: "~> 1.4",
-      description: description(),
       package: package(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :ueberauth, :oauth2]]
+    [
+      extra_applications: [:logger, :ueberauth, :oauth2]
+    ]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:my_dep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
     [
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.7"},
-      {:ex_doc, ">= 0.19.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
-  end
-
-  defp description do
-    "Microsoft Strategy for Überauth"
   end
 
   defp package do
     [
       name: :ueberauth_microsoft,
+      description: "Microsoft Strategy for Überauth",
       maintainers: ["swelham"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/swelham/ueberauth_microsoft"}
+      links: %{
+        "GitHub" => @source_url
+      }
+    ]
+  end
+
+  defp docs do
+    [
+      extras: [
+        "LICENSE.md": [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      main: "readme",
+      source_url: @source_url,
+      source_ref: "v#{@version}",
+      formatters: ["html"]
     ]
   end
 end
