@@ -16,6 +16,7 @@ defmodule Ueberauth.Strategy.Microsoft do
     params =
       [scope: scopes]
       |> with_scopes(:extra_scopes, conn)
+      |> with_optional(:prompt, conn)
       |> with_state_param(conn)
 
     opts = oauth_client_options_from_conn(conn)
@@ -115,6 +116,10 @@ defmodule Ueberauth.Strategy.Microsoft do
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
+  end
+
+  defp with_optional(opts, key, conn) do
+    if option(conn, key), do: Keyword.put(opts, key, option(conn, key)), else: opts
   end
 
   defp with_scopes(opts, key, conn) do
