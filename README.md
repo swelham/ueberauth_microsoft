@@ -116,6 +116,15 @@ config :ueberauth, Ueberauth,
   ]
 ```
 
+If you would like users to have the option to choose an alternate account to authenticate with instead of defaulting to the logged in account, you may pass the `prompt` option in to the provider (per [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)):
+
+```elixir
+config :ueberauth, Ueberauth,
+  providers: [
+    microsoft: {Ueberauth.Strategy.Microsoft, [prompt: "select_account"]}
+  ]
+```
+
 ## Copyright and License
 
 Copyright (c) 2017 Stuart Welham
