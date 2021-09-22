@@ -17,7 +17,7 @@
     ```elixir
     def deps do
       [
-        {:ueberauth_microsoft, "~> 0.13"}
+        {:ueberauth_microsoft, "~> 0.14"}
       ]
     end
     ```
