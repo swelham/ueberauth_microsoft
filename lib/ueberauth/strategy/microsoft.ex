@@ -68,11 +68,13 @@ defmodule Ueberauth.Strategy.Microsoft do
 
   def credentials(conn) do
     token = conn.private.ms_token
+    scope_string = token.other_params["scope"] || ""
+    scopes = String.split(scope_string, " ", trim: true)
 
     %Credentials{
       expires: token.expires_at != nil,
       expires_at: token.expires_at,
-      scopes: token.other_params["scope"],
+      scopes: scopes,
       token: token.access_token,
       refresh_token: token.refresh_token,
       token_type: token.token_type
