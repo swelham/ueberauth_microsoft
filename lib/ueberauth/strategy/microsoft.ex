@@ -134,10 +134,20 @@ defmodule Ueberauth.Strategy.Microsoft do
     base_options = [redirect_uri: callback_url(conn)]
     request_options = conn.private[:ueberauth_request_options].options
 
-    case {request_options[:client_id], request_options[:client_secret]} do
-      {nil, _} -> base_options
-      {_, nil} -> base_options
-      {id, secret} -> [client_id: id, client_secret: secret] ++ base_options
+    request_options =
+      Keyword.take(request_options, [
+        :tenant_id,
+        :client_id,
+        :client_secret,
+        :authorize_url,
+        :token_url,
+        :request_opts
+      ])
+
+    if nil in Keyword.values(request_options) do
+      base_options
+    else
+      request_options ++ base_options
     end
   end
 
