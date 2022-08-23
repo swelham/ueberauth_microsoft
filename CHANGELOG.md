@@ -1,3 +1,8 @@
+## [0.16.0] - 2022-08-23
+#### Enhancements
+
+  * [[#55](https://github.com/swelham/ueberauth_microsoft/pull/55)] Allow dynamic configs ([@ryanzidago](https://github.com/ryanzidago))
+
 ## [0.15.0] - 2022-04-06
 #### :boom: Breaking Changes
 
