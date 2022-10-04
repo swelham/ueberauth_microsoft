@@ -9,8 +9,7 @@
 
 ## Installation
 
-1.  Setup your application at the new [Microsoft app registration
-    portal](https://apps.dev.microsoft.com).
+1.  Register an application in the Azure Portal ([see Microsoft tutorial for more info](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)).
 
 2.  Add `:ueberauth_microsoft` to your list of dependencies in `mix.exs`:
 
