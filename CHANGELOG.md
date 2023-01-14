@@ -1,3 +1,8 @@
+## [0.18.0] - 2023-01-14
+#### Dependencies
+
+  * [[#62](https://github.com/swelham/ueberauth_microsoft/pull/62)] Updated `oauth2` from `2.0.1` to `2.1.0`.
+
 ## [0.17.0] - 2022-10-04
 #### Dependencies
 
