@@ -7,6 +7,8 @@
 
 > Microsoft OAuth2 strategy for Überauth.
 
+Quick start blog post: [Authenticating users with Microsoft OAuth](https://www.stuartwelham.com/articles/authenticating-users-with-microsoft-oauth)
+
 ## Installation
 
 1.  Register an application in the Azure Portal ([see Microsoft tutorial for more info](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)).
