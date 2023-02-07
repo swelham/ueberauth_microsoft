@@ -12,11 +12,11 @@ defmodule Ueberauth.Strategy.Microsoft do
   """
   def handle_request!(conn) do
     scopes = conn.params["scope"] || option(conn, :default_scope)
+    prompt = conn.params["prompt"] || option(conn, :prompt)
 
     params =
-      [scope: scopes]
+      [scope: scopes, prompt: prompt]
       |> with_scopes(:extra_scopes, conn)
-      |> with_optional(:prompt, conn)
       |> with_state_param(conn)
 
     opts = oauth_client_options_from_conn(conn)
