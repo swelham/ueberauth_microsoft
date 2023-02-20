@@ -1,3 +1,8 @@
+## [0.19.0] - 2023-02-20
+
+- [[#64](https://github.com/swelham/ueberauth_microsoft/pull/64)] Support loading config dynamically ([@docJerem](https://github.com/docJerem))
+- [[#65](https://github.com/swelham/ueberauth_microsoft/pull/65)] Allow overriding the `prompt` option ([@trashhalo](https://github.com/trashhalo))
+
 ## [0.18.0] - 2023-01-14
 
 #### Dependencies
