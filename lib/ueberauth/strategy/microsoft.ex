@@ -12,11 +12,11 @@ defmodule Ueberauth.Strategy.Microsoft do
   """
   def handle_request!(conn) do
     scopes = conn.params["scope"] || option(conn, :default_scope)
+    prompt = conn.params["prompt"] || option(conn, :prompt)
 
     params =
-      [scope: scopes]
+      [scope: scopes, prompt: prompt]
       |> with_scopes(:extra_scopes, conn)
-      |> with_optional(:prompt, conn)
       |> with_state_param(conn)
 
     opts = oauth_client_options_from_conn(conn)
@@ -118,10 +118,6 @@ defmodule Ueberauth.Strategy.Microsoft do
       {:error, %Error{reason: reason}} ->
         set_errors!(conn, [error("OAuth2", reason)])
     end
-  end
-
-  defp with_optional(opts, key, conn) do
-    if option(conn, key), do: Keyword.put(opts, key, option(conn, key)), else: opts
   end
 
   defp with_scopes(opts, key, conn) do
