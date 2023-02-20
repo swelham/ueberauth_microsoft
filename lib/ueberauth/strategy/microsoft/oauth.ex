@@ -6,7 +6,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   alias OAuth2.Strategy.AuthCode
 
   def client(opts \\ []) do
-    config = Application.get_env(:ueberauth, __MODULE__)
+    config = Application.get_env(:ueberauth, __MODULE__, [])
     json_library = Ueberauth.json_library()
 
     config
