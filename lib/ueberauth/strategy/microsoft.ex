@@ -120,10 +120,6 @@ defmodule Ueberauth.Strategy.Microsoft do
     end
   end
 
-  defp with_optional(opts, key, conn) do
-    if option(conn, key), do: Keyword.put(opts, key, option(conn, key)), else: opts
-  end
-
   defp with_scopes(opts, key, conn) do
     if option(conn, key),
       do: Keyword.put(opts, :scope, "#{Keyword.get(opts, :scope, "")} #{option(conn, key)}"),
