@@ -18,7 +18,7 @@ Quick start blog post: [Authenticating users with Microsoft OAuth](https://www.s
     ```elixir
     def deps do
       [
-        {:ueberauth_microsoft, "~> 0.18"}
+        {:ueberauth_microsoft, "~> 0.19"}
       ]
     end
     ```
@@ -71,8 +71,8 @@ Quick start blog post: [Authenticating users with Microsoft OAuth](https://www.s
     end
     ```
 
-8. Your controller needs to implement callbacks to deal with `Ueberauth.Auth`
-   and `Ueberauth.Failure` responses.
+8.  Your controller needs to implement callbacks to deal with `Ueberauth.Auth`
+    and `Ueberauth.Failure` responses.
 
 For an example implementation see the [Überauth Example](https://github.com/ueberauth/ueberauth_example) application.
 
@@ -96,13 +96,13 @@ Depending on the configured url you can initial the request through:
 
 By default the scopes used are:
 
-* openid
-* email
-* offline_access
-* https://graph.microsoft.com/user.read
+- openid
+- email
+- offline_access
+- https://graph.microsoft.com/user.read
 
-*Note: at least one service scope is required in order for a token to be
-returned by the Microsoft endpoint*
+_Note: at least one service scope is required in order for a token to be
+returned by the Microsoft endpoint_
 
 You can configure additional scopes to be used by passing the `extra_scopes`
 option into the provider:
