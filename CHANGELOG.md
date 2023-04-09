@@ -1,3 +1,9 @@
+## [0.20.0] - 2023-04-09
+
+#### Dependencies
+
+- [[#68](https://github.com/swelham/ueberauth_microsoft/pull/68)] Updated `ueberauth` from `0.10.3` to `0.10.5`.
+
 ## [0.19.0] - 2023-02-20
 
 - [[#64](https://github.com/swelham/ueberauth_microsoft/pull/64)] Support loading config dynamically ([@docJerem](https://github.com/docJerem))
