@@ -18,7 +18,7 @@ Quick start blog post: [Authenticating users with Microsoft OAuth](https://www.s
     ```elixir
     def deps do
       [
-        {:ueberauth_microsoft, "~> 0.20"}
+        {:ueberauth_microsoft, "~> 0.21"}
       ]
     end
     ```

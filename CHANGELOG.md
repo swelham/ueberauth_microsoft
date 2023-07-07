@@ -1,3 +1,14 @@
+## [0.21.0] - 2023-07-07
+
+- [[#72](https://github.com/swelham/ueberauth_microsoft/pull/72)] - Remove custom SSL options ([@arjan](https://github.com/arjan))
+
+This change removes TLS 1.2 as the default ssl option in response to recent OTP changes. If you require TLS 1.2, you can specify this option in your `:ueberauth` config.
+
+```elixir
+config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
+  request_opts: [ssl_options: [versions: [:"tlsv1.2"]]]
+```
+
 ## [0.20.0] - 2023-04-09
 
 #### Dependencies
