@@ -1,10 +1,5 @@
 import Config
 
-config :ueberauth, Ueberauth,
-  providers: [
-    microsoft: {Ueberauth.Strategy.Microsoft, []}
-  ]
-
-config :ueberauth, Ueberauth.Strategy.Microsoft.OAuth,
-  client_id: "client_id",
-  client_secret: "client_secret"
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{config_env()}.exs"
