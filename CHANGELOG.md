@@ -1,3 +1,7 @@
+## [0.22.0] - 2023-09-22
+
+- [[#79](https://github.com/swelham/ueberauth_microsoft/pull/79)] - Add the option to get the client secret dynamically ([@alejandrodevs](https://github.com/alejandrodevs))
+
 ## [0.21.0] - 2023-07-07
 
 - [[#72](https://github.com/swelham/ueberauth_microsoft/pull/72)] - Remove custom SSL options ([@arjan](https://github.com/arjan))
