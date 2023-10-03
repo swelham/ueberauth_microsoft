@@ -1,3 +1,7 @@
+## [0.23.0] - 2023-09-22
+
+- [[#80](https://github.com/swelham/ueberauth_microsoft/pull/80)] - Add support for lc (locale) param in authorization URL ([@alejandrodevs](https://github.com/alejandrodevs))
+
 ## [0.22.0] - 2023-09-22
 
 - [[#79](https://github.com/swelham/ueberauth_microsoft/pull/79)] - Add the option to get the client secret dynamically ([@alejandrodevs](https://github.com/alejandrodevs))
