@@ -18,6 +18,7 @@ defmodule Ueberauth.Strategy.Microsoft do
       [scope: scopes, prompt: prompt]
       |> with_scopes(:extra_scopes, conn)
       |> with_state_param(conn)
+      |> with_param(:lc, conn)
 
     opts = oauth_client_options_from_conn(conn)
     redirect!(conn, Ueberauth.Strategy.Microsoft.OAuth.authorize_url!(params, opts))
@@ -153,5 +154,9 @@ defmodule Ueberauth.Strategy.Microsoft do
     conn
     |> options
     |> Keyword.get(key, default)
+  end
+
+  defp with_param(opts, key, conn) do
+    if value = conn.params[to_string(key)], do: Keyword.put(opts, key, value), else: opts
   end
 end
