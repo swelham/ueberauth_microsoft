@@ -1,3 +1,7 @@
+## [0.24.0] - 2025-06-11
+
+- [[#97](https://github.com/swelham/ueberauth_microsoft/pull/97)] - Add support for refreshing tokens ([@joshua-bouv](https://github.com/joshua-bouv))
+
 ## [0.23.0] - 2023-09-22
 
 - [[#80](https://github.com/swelham/ueberauth_microsoft/pull/80)] - Add support for lc (locale) param in authorization URL ([@alejandrodevs](https://github.com/alejandrodevs))

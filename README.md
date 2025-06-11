@@ -18,7 +18,7 @@ Quick start blog post: [Authenticating users with Microsoft OAuth](https://www.s
     ```elixir
     def deps do
       [
-        {:ueberauth_microsoft, "~> 0.23"}
+        {:ueberauth_microsoft, "~> 0.24"}
       ]
     end
     ```
@@ -116,7 +116,7 @@ config :ueberauth, Ueberauth,
     }
   ]
 ```
- 
+
 If you would like users to have the option to choose an alternate account to authenticate with instead of defaulting to the logged in account, you may pass the `prompt` option in to the provider (per [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)):
 
 ```elixir
@@ -130,11 +130,12 @@ config :ueberauth, Ueberauth,
 
 Depending on your requirements, it may be necessary to get a new access code after expiry.
 To do so, you need to persist the `refresh_token` and use it later to get a new access code like:
-  ```elixir
-  refresh_token = Token.get_refresh_token()
 
-  Ueberauth.Strategy.Microsoft.OAuth.refresh_token!(refresh_token: refresh_token)
-  ```
+```elixir
+refresh_token = Token.get_refresh_token()
+
+Ueberauth.Strategy.Microsoft.OAuth.refresh_token!(refresh_token: refresh_token)
+```
 
 ## Copyright and License
 
