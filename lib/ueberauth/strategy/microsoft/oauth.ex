@@ -4,6 +4,7 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
   alias Ueberauth
   alias OAuth2.Client
   alias OAuth2.Strategy.AuthCode
+  alias OAuth2.Strategy.Refresh
 
   def client(opts \\ []) do
     config = Application.get_env(:ueberauth, __MODULE__, [])
@@ -30,6 +31,12 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> Client.get_token!(params)
   end
 
+  def refresh_token!(params \\ [], opts \\ []) do
+    (opts ++ [token: %OAuth2.AccessToken{refresh_token: params[:refresh_token]}])
+    |> client
+    |> Client.refresh_token!(params)
+  end
+
   # oauth2 Strategy Callbacks
 
   def authorize_url(client, params) do
@@ -41,6 +48,13 @@ defmodule Ueberauth.Strategy.Microsoft.OAuth do
     |> put_param(:client_secret, client.client_secret)
     |> put_header("Accept", "application/json")
     |> AuthCode.get_token(params, headers)
+  end
+
+  def refresh_token(client, params, headers) do
+    client
+    |> put_param(:client_id, client.client_id)
+    |> put_param(:client_secret, client.client_secret)
+    |> Refresh.get_token(params, headers)
   end
 
   defp defaults(config) do
