@@ -1,3 +1,7 @@
+## [0.25.0] - 2026-01-23
+
+- [[#98](https://github.com/swelham/ueberauth_microsoft/pull/98)] - Don't trust unverified email ([@brandonjoyce](https://github.com/brandonjoyce))
+
 ## [0.24.0] - 2025-06-11
 
 - [[#97](https://github.com/swelham/ueberauth_microsoft/pull/97)] - Add support for refreshing tokens ([@joshua-bouv](https://github.com/joshua-bouv))
