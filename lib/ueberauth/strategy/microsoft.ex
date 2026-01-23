@@ -87,7 +87,7 @@ defmodule Ueberauth.Strategy.Microsoft do
 
     %Info{
       name: user["displayName"],
-      email: user["mail"] || user["userPrincipalName"],
+      email: user["userPrincipalName"],
       first_name: user["givenName"],
       last_name: user["surname"]
     }
